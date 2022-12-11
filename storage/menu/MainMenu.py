@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from storage.Box import Box
 from storage.Game import Game
 from storage.menu import MenuItem, Menu
@@ -8,30 +10,34 @@ def buildBox(instance: Game, boxType, rarity=1, keys=1):
     newBox = Box(boxType, rarity, keys, contents)
     return newBox
 
-def pull(instance: Game, bType: str):
-    global failCount
-    boxType = instance.getBoxType(bType)
-    item = boxType.getItem().generateSeededItem(failCount)
-    if item.rarity is None or item.rarity < 0.95:
-        failCount+=1
-    else:
-        failCount=int(failCount*0.2)
-    return item
-
 def __mm_FuckOff(instance: Game):
     import sys
     sys.exit(0)
 
 def __mm_Pull(instance: Game):
-    failCount = 0
     highest = 0
-    for x in range(100):
-        i = pull(instance, "copper")
-        print("rarity: " + str(i.rarity))
-        print(failCount)
-        if highest < failCount:
-            highest = failCount
-        print("highest " + str(highest))
+    avg = []
+    failCount = 0
+    for x in range(1000000):
+        i = instance.player.pull(instance.getBoxType("copper"))
+        if i.rarity > 0.95:
+            if highest < failCount:
+                highest = failCount
+            avg.append(failCount)
+            failCount = 0
+        else:
+            failCount+=1
+    print("highest " + str(highest))
+    average = 0
+    freq: dict[int, int] = {}
+    for x in avg:
+        average += x
+        if x not in freq.keys():
+            freq[x] = 1
+        else:
+            freq[x] += 1
+    print("average " + str(average/len(avg)))
+    print("inventory size " + str(len(instance.player.inventory)))
 
 def __mm_Hit(instance: Game):
     instance.player.hit(10)

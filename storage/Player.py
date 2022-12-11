@@ -1,4 +1,8 @@
 from math import ceil
+from random import randint
+
+from storage.BoxType import BoxType
+from storage.Item import Item
 
 defenceTailOff = 50
 defenceLimit = 70
@@ -15,6 +19,22 @@ class Player:
         self.damage = damage
         self.defence = defence
         self.dodge = dodge
+        self.pity: dict[BoxType, int] = {}
+        self.inventory: list[Item] = []
+
+    def pull(self, boxType: BoxType):
+        if boxType in self.pity.keys():
+            pity = self.pity[boxType]
+        else:
+            pity = 40
+            self.pity[boxType] = pity
+        item = boxType.getItem().generateSeededItem(pity)
+        if item.rarity > 0.95:
+            self.pity[boxType] = int(self.pity[boxType] * (randint(5, 40) / 100))
+        else:
+            self.pity[boxType] += 1
+        self.inventory.append(item)
+        return item
 
     def getReduction(self):
         global defenceLimit, defenceTailOff
