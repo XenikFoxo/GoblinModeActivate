@@ -19,3 +19,16 @@ class Item:
             self.name = "Mighty Fuck Off Object"
         else:
             self.name = name
+
+    def serialize(self):
+        return repr({
+            'name': self.name,
+            'equipmentType': self.equipmentType,
+            'tooltip': self.tooltip,
+            'rarity': self.rarity,
+        })
+
+    @staticmethod
+    def deserialize(string):
+        data = eval(string)
+        return Item(data['name'], data['rarity'], data['equipmentType'], data['tooltip'])

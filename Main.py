@@ -11,8 +11,9 @@ debugMode = True  # will be implemented later
 equipmentTypes = ("weapon", "headgear", "chest", "arm", "ring", "leg", "shield", "shoes")
 
 if __name__ == "__main__":
-    player = Player(health=50,defence=10)
+    player = Player(health=50,)
     instance = Game(player)
+    instance.load()
     currentMenu = generateMainMenu()
     # Main Loop
     while True:

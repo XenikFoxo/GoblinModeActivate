@@ -18,7 +18,7 @@ def __mm_Pull(instance: Game):
     highest = 0
     avg = []
     failCount = 0
-    for x in range(1000000):
+    for x in range(100):
         i = instance.player.pull(instance.getBoxType("copper"))
         if i.rarity > 0.95:
             if highest < failCount:
@@ -38,10 +38,12 @@ def __mm_Pull(instance: Game):
             freq[x] += 1
     print("average " + str(average/len(avg)))
     print("inventory size " + str(len(instance.player.inventory)))
+    instance.save()
 
 def __mm_Hit(instance: Game):
     instance.player.hit(10)
     print(instance.player.health)
+    instance.save()
 
 def generateMainMenu():
     pull = MenuItem("pull", "Pull some random items", __mm_Pull)

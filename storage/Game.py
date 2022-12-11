@@ -1,13 +1,14 @@
 from storage.BoxType import BoxType
+from storage.Player import Player
 from storage.PotentialItem import PotentialItem
 
 
 def _generateBoxSets() -> dict[str, BoxType]:
     return {
-        "copper": BoxType((PotentialItem("firstC"), PotentialItem("secondC"), PotentialItem("thirdC"))),
-        "iron": BoxType((PotentialItem("firstI"), PotentialItem("secondI"), PotentialItem("thirdI"))),
-        "silver": BoxType((PotentialItem("firstS"), PotentialItem("secondS"), PotentialItem("thirdS"))),
-        "gold": BoxType((PotentialItem("firstG"), PotentialItem("secondG"), PotentialItem("thirdG")))
+        "copper": BoxType("copper", (PotentialItem("firstC"), PotentialItem("secondC"), PotentialItem("thirdC"))),
+        "iron": BoxType("iron", (PotentialItem("firstI"), PotentialItem("secondI"), PotentialItem("thirdI"))),
+        "silver": BoxType("silver", (PotentialItem("firstS"), PotentialItem("secondS"), PotentialItem("thirdS"))),
+        "gold": BoxType("gold", (PotentialItem("firstG"), PotentialItem("secondG"), PotentialItem("thirdG")))
     }
 
 
@@ -20,3 +21,17 @@ class Game:
     def getBoxType(self, box: str) -> BoxType:
         return self.boxes[box]
 
+    def save(self):
+        try:
+            with open("save.json", "w") as f:
+                f.write(self.player.serialize())
+        except Exception:
+            print('Error in Save Function')
+
+    def load(self):
+        try:
+            with open("save.json", "r") as f:
+                player = Player.deserialize(f.read())
+            self.player = player
+        except Exception:
+            print('Error in Load Function')

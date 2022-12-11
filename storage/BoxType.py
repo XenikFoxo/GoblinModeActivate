@@ -4,7 +4,8 @@ from storage.PotentialItem import PotentialItem
 
 
 class BoxType:
-    def __init__(self, potentialItems):
+    def __init__(self, name, potentialItems):
+        self.name = name
         self.potentialItems = potentialItems
 
     def getItem(self) -> PotentialItem:
