@@ -1,8 +1,11 @@
 # Imports
+import sys
+
 from storage.Box import Box
 from storage.BoxType import BoxType
 from storage.Player import Player
 from storage.PotentialItem import PotentialItem
+from storage.menu import MenuItem, Menu
 
 # Defining Variables
 debugMode = True  # will be implemented later
@@ -39,30 +42,44 @@ def pull(bType):
         failCount=int(failCount*0.2)
     return item
 
+def mm_FuckOff(instance):
+    global notFucked
+    notFucked = False
+
+def mm_Pull(instance):
+    global failCount
+    failCount = 0
+    highest = 0
+    for x in range(100):
+        i = pull("copper")
+        print("rarity: " + str(i.rarity))
+        print(failCount)
+        if highest < failCount:
+            highest = failCount
+        print("highest " + str(highest))
+
+def mm_Hit(instance):
+    instance.hit(10)
+    print(instance.health)
+
+def generateMainMenu():
+    pull = MenuItem("pull", "Pull some random items", mm_Pull)
+    hit = MenuItem("hit", "Smack a Bitch", mm_Hit)
+    fuckOff = MenuItem("fuck off", "Furry Sex Time", mm_FuckOff)
+    menu = Menu()
+    menu.add(pull)
+    menu.add(hit)
+    menu.add(fuckOff)
+    return menu
+
 
 if __name__ == "__main__":
     player = Player(health=50,defence=10)
+    mainMenu = generateMainMenu()
     # Main Loop
     while notFucked:
         if currentMenu == "Main":
             print("Test Menu Here, disregard")
-            print("MENU OPTIONS:\npull: Pull\nstart: Start the damn game.\noptions: This does nothing right now.\nfuck off: Does what it says.")
-            select = input(">> ").lower()
-            if select == "fuck off" or select == "q":
-                notFucked = False
-            if select == "pull":
-                failCount = 0
-                highest = 0
-                for x in range(100):
-                    i = pull("copper")
-                    print("rarity: " + str(i.rarity))
-                    print(failCount)
-                    if highest < failCount:
-                        highest = failCount
-                    print("highest " + str(highest))
-            if select == "hit":
-                player.hit(10)
-                print(player.health)
-            if select == "options":
-                for item in boxInventory:
-                    print(item.contents.generateSeededItem().name)
+            mainMenu.print()
+            option = input(">>> ")
+            mainMenu.option(option, player)
