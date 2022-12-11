@@ -18,7 +18,7 @@ boxSets: dict[str, BoxType] = {
 }
 
 # Defining Lists
-equipmentTypes = ("weapon", "headwear", "chest", "arm", "ring", "leg", "shield", "shoes")
+equipmentTypes = ("weapon", "headgear", "chest", "arm", "ring", "leg", "shield", "shoes")
 boxInventory = []
 keyInventory = []
 
