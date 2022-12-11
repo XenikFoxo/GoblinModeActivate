@@ -2,16 +2,18 @@ from collections import OrderedDict
 
 from storage.Box import Box
 from storage.Game import Game
+from storage.Variant import BoxTypeVariant
 from storage.menu import MenuItem, Menu
 
 
 def buildBox(instance: Game, boxType, rarity=1, keys=1):
     contents = instance.getBoxType(boxType).getItem()
-    newBox = Box(boxType, rarity, keys, contents)
+    newBox = Box(boxType, contents)
     return newBox
 
 def __mm_FuckOff(instance: Game):
     import sys
+    instance.save()
     sys.exit(0)
 
 def __mm_Pull(instance: Game):
@@ -19,7 +21,7 @@ def __mm_Pull(instance: Game):
     avg = []
     failCount = 0
     for x in range(100):
-        i = instance.player.pull(instance.getBoxType("copper"))
+        i = instance.player.pull(BoxTypeVariant.COPPER.value)
         if i.rarity > 0.95:
             if highest < failCount:
                 highest = failCount
