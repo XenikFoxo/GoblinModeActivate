@@ -1,6 +1,7 @@
 # Imports
 from storage.Box import Box
 from storage.BoxType import BoxType
+from storage.Player import Player
 from storage.PotentialItem import PotentialItem
 
 # Defining Variables
@@ -40,6 +41,7 @@ def pull(bType):
 
 
 if __name__ == "__main__":
+    player = Player(health=50,defence=10)
     # Main Loop
     while notFucked:
         if currentMenu == "Main":
@@ -58,6 +60,9 @@ if __name__ == "__main__":
                     if highest < failCount:
                         highest = failCount
                     print("highest " + str(highest))
+            if select == "hit":
+                player.hit(10)
+                print(player.health)
             if select == "options":
                 for item in boxInventory:
                     print(item.contents.generateSeededItem().name)
