@@ -1,7 +1,7 @@
 # Imports
 
 from storage.Game import Game
-from storage.Player import Player
+from storage.entity.Player import Player
 from storage.menu.MainMenu import generateMainMenu
 
 # Defining Variables

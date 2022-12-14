@@ -1,6 +1,6 @@
 from random import choice
 
-from storage.PotentialItem import PotentialItem
+from storage.Item.PotentialItem import PotentialItem
 
 
 class BoxType:

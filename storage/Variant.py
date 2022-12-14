@@ -1,7 +1,7 @@
 from enum import Enum
 
-from storage.BoxType import BoxType
-from storage.PotentialItem import PotentialItem
+from storage.Item.BoxType import BoxType
+from storage.Item.PotentialItem import PotentialItem
 
 
 class BoxTypeVariant(Enum):

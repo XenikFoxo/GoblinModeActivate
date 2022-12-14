@@ -1,6 +1,6 @@
-from storage.BoxType import BoxType
-from storage.Player import Player
-from storage.PotentialItem import PotentialItem
+from storage.Item.BoxType import BoxType
+from storage.entity.Player import Player
+from storage.Item.PotentialItem import PotentialItem
 
 
 def _generateBoxSets() -> dict[str, BoxType]:

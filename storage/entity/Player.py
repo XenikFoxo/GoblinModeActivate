@@ -1,7 +1,7 @@
 from math import ceil
 from random import randint
 
-from storage.BoxType import BoxType
+from storage.Item.BoxType import BoxType
 from storage.Item import Item
 from storage.entity import Entity
 

@@ -1,6 +1,4 @@
-from collections import OrderedDict
-
-from storage.Box import Box
+from storage.Item.Box import Box
 from storage.Game import Game
 from storage.Variant import BoxTypeVariant
 from storage.entity import Entity

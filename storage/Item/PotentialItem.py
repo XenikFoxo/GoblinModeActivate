@@ -1,5 +1,5 @@
 from storage.Item import Item
-from storage.ItemList import itemDict
+from storage.Item.ItemList import itemDict
 
 class PotentialItem:
     def __init__(self, name):

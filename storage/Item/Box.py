@@ -1,4 +1,4 @@
-from storage.PotentialItem import PotentialItem
+from storage.Item.PotentialItem import PotentialItem
 from storage.Variant import BoxTypeVariant
 
 
