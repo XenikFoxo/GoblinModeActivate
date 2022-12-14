@@ -12,3 +12,6 @@ class Entity:
     def hit(self, amount) -> int:
         self.health -= (amount - self.defenseStat)
         return self.health
+
+    def printHealth(self):
+        print(str(self.name) + " has " + str(self.health) + "HP")

@@ -1,3 +1,4 @@
+from storage.CombatInstance import CombatInstance
 from storage.Item.Box import Box
 from storage.Game import Game
 from storage.Variant import BoxTypeVariant
@@ -58,6 +59,8 @@ def __mm_Save(instance: Game): #Created so I can understand how menu generation 
         return
     return
 
+def __mm_Combat(instance: Game):
+    CombatInstance(instance, Entity("Goblin", 5, 1, 0)).loop()
 
 def generateMainMenu():
     pull = MenuItem("pull", "Pull some random items", __mm_Pull)
@@ -65,10 +68,12 @@ def generateMainMenu():
     fuckOff = MenuItem("fuck off", "Furry Sex Time", __mm_FuckOff)
     saveGame = MenuItem("save", "Save the damn game", __mm_Save)
     atk = MenuItem("atk", "Combat go Brrr", __mm_TestAttack)
+    combat = MenuItem("combat", "More Combat", __mm_Combat)
     menu = Menu()
     menu.add(pull)
     menu.add(hit)
     menu.add(fuckOff)
     menu.add(saveGame)
     menu.add(atk)
+    menu.add(combat)
     return menu
