@@ -47,12 +47,23 @@ def __mm_Hit(instance: Game):
     print(instance.player.health)
     instance.save()
 
+def __mm_Save(instance: Game): #Created so I can understand how menu generation works
+    try:
+        instance.save()
+        print("Instance Saved")
+    except:
+        return
+    return
+
+
 def generateMainMenu():
     pull = MenuItem("pull", "Pull some random items", __mm_Pull)
     hit = MenuItem("hit", "Smack a Bitch", __mm_Hit)
     fuckOff = MenuItem("fuck off", "Furry Sex Time", __mm_FuckOff)
+    saveGame = MenuItem("save", "Save the damn game", __mm_Save)
     menu = Menu()
     menu.add(pull)
     menu.add(hit)
     menu.add(fuckOff)
+    menu.add(saveGame)
     return menu

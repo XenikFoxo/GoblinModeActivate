@@ -22,7 +22,7 @@ class Player:
         else:
             pity = 40
             self.pity[boxType.name] = pity
-        item = boxType.getItem().generateSeededItem(pity)
+        item = boxType.getItem().generateItem(pity)
         if item.rarity > 0.95:
             self.pity[boxType.name] = int(self.pity[boxType.name] * (randint(5, 40) / 100))
         else:
