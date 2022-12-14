@@ -3,14 +3,16 @@ from random import randint
 
 from storage.BoxType import BoxType
 from storage.Item import Item
+from storage.entity import Entity
 
-defenceTailOff = 50
-defenceLimit = 70
-class Player:
+defenseTailOff = 50
+defenseLimit = 70
+class Player(Entity):
     def __init__(self,
                  money = 0,
                  health = 20,
                  ):
+        super().__init__("Player", health, 1, 0)
         self.money = money
         self.health = health
         self.pity: dict[BoxType, int] = {}
@@ -31,13 +33,13 @@ class Player:
         return item
 
     def getReduction(self):
-        global defenceLimit, defenceTailOff
-        overDefence = 1 - defenceTailOff
-        if overDefence > 0:
-            defence = min(defenceTailOff + int(overDefence / 10), defenceLimit)
+        global defenseLimit, defenseTailOff
+        overDefense = self.defense - defenseTailOff
+        if overDefense > 0:
+            defense = min(defenseTailOff + int(overDefense / 10), defenseLimit)
         else:
-            defence = 1
-        return defence
+            defense = self.defense
+        return defense
 
     def hit(self, damage):
         damage = damage - ceil((damage * (self.getReduction() / 100)))
