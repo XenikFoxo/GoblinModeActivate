@@ -3,6 +3,7 @@ from collections import OrderedDict
 from storage.Box import Box
 from storage.Game import Game
 from storage.Variant import BoxTypeVariant
+from storage.entity import Entity
 from storage.menu import MenuItem, Menu
 
 
@@ -42,6 +43,10 @@ def __mm_Pull(instance: Game):
     print("inventory size " + str(len(instance.player.inventory)))
     instance.save()
 
+def __mm_TestAttack(instance: Game):
+    health = instance.player.attack(Entity("Goblin", 5, 5, 0))
+    print(health)
+
 def __mm_Hit(instance: Game):
     instance.player.hit(10)
     print(instance.player.health)
@@ -61,9 +66,11 @@ def generateMainMenu():
     hit = MenuItem("hit", "Smack a Bitch", __mm_Hit)
     fuckOff = MenuItem("fuck off", "Furry Sex Time", __mm_FuckOff)
     saveGame = MenuItem("save", "Save the damn game", __mm_Save)
+    atk = MenuItem("atk", "Combat go Brrr", __mm_TestAttack)
     menu = Menu()
     menu.add(pull)
     menu.add(hit)
     menu.add(fuckOff)
     menu.add(saveGame)
+    menu.add(atk)
     return menu

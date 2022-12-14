@@ -34,11 +34,11 @@ class Player(Entity):
 
     def getReduction(self):
         global defenseLimit, defenseTailOff
-        overDefense = self.defense - defenseTailOff
+        overDefense = self.defenseStat - defenseTailOff
         if overDefense > 0:
             defense = min(defenseTailOff + int(overDefense / 10), defenseLimit)
         else:
-            defense = self.defense
+            defense = self.defenseStat
         return defense
 
     def hit(self, damage):

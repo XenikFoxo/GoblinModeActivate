@@ -14,7 +14,7 @@ def _generateBoxSets() -> dict[str, BoxType]:
 
 class Game:
 
-    def __init__(self, player):
+    def __init__(self, player: Player):
         self.player = player
         self.boxes = _generateBoxSets()
 

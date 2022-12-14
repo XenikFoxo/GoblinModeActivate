@@ -3,12 +3,12 @@ class Entity:
     def __init__(self, name: str, health: int = 0, attack: int = 0, defense: int = 0):
         self.name: str = name
         self.health: int = health
-        self.attack: int = attack
-        self.defense: int = defense
+        self.attackStat: int = attack
+        self.defenseStat: int = defense
 
     def attack(self, target):
-        target.hit(self.attack)
+        target.hit(self.attackStat)
     
     def hit(self, amount) -> int:
-        self.health -= (amount - self.defense)
+        self.health -= (amount - self.defenseStat)
         return self.health
